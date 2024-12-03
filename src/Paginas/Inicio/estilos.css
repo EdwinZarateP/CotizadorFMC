@@ -27,9 +27,7 @@
   }
 
   .Inicio-logo-fmc {
-    width: 150px; /* Ajuste para pantallas más pequeñas */
-    max-width: 20%; /* Asegura que no sea más grande que el contenedor */
-    height: auto;
+    width: 190px; /* Ajuste para pantallas más pequeñas */
     margin-bottom: 20px; /* Espacio entre el logo y el formulario */
   }
   
@@ -44,7 +42,7 @@
   /* Ajustes para pantallas grandes (desktop) */
   @media (min-width: 1024px) {
     .Inicio-logo-integra {
-      width: 50px;
+      width: 70px;
       max-width: 10%;
     }
   

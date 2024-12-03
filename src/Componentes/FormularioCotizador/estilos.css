@@ -1,36 +1,93 @@
-/* Contenedor principal del formulario */
-.FormularioCotizador-container {
+/* Contenedor principal */
+.formulario-cotizador-contenedor {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
   width: 100%;
-  max-width: 500px; /* Limita el ancho máximo */
+  max-width: 500px;
   background-color: white;
   padding: 20px;
   border-radius: 10px;
-  box-shadow:  4px 4px 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 4px 4px 4px 6px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
+  margin: 0 auto;
+  height: 100%;
 }
 
-/* Selectores y inputs */
-.FormularioCotizador-select,
-.FormularioCotizador-inputs {
-  display: flex;
-  flex-direction: column;
+/* Selectores */
+.formulario-cotizador-select {
+  position: relative;
   margin-bottom: 16px;
+  width: 100%;
 }
 
-.FormularioCotizador-select select,
-.FormularioCotizador-inputs input,
-.FormularioCotizador-input {
-  padding: 10px;
+.formulario-cotizador-select input {
+  width: 100%;
+  padding: 10px 35px 10px 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 1rem;
 }
 
+.icono-limpiar {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  color: #666;
+  cursor: pointer;
+  visibility: hidden;
+}
+
+.formulario-cotizador-select input:not(:placeholder-shown) ~ .icono-limpiar {
+  visibility: visible;
+}
+
+/* Dimensiones en fila */
+.formulario-cotizador-entradas-fila {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.formulario-cotizador-entradas-fila input {
+  display: flex;
+  padding: 10px;
+  width: 30%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  box-sizing: border-box;
+}
+
+/* Campos Peso, Cajas y Valor declarado */
+.formulario-cotizador-entradas {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.input-peso,
+.input-cajas,
+.input-declarado {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+}
+
 /* Botón */
-.FormularioCotizador-boton {
+.formulario-cotizador-boton {
   width: 100%;
   padding: 12px;
-  background-color: #007bff;
+  background-color: #95b22c;
   color: white;
   border: none;
   border-radius: 5px;
@@ -38,33 +95,53 @@
   cursor: pointer;
 }
 
-.FormularioCotizador-boton:hover {
-  background-color: #0056b3;
+.formulario-cotizador-boton:hover {
+  background-color: #aed035;
 }
 
-/* Texto y mensajes */
-.FormularioCotizador-tarifa,
-.FormularioCotizador-restricciones {
-  text-align: center;
-  margin: 8px 0;
-  font-size: 0.9rem;
-  color: #333;
+/* Sugerencias */
+.formulario-cotizador-sugerencias {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  max-height: 150px;
+  overflow-y: auto;
+  z-index: 10;
 }
 
-/* Ajustes responsivos */
-@media (min-width: 600px) {
-  .FormularioCotizador-container {
-    max-width: 400px;
-    padding: 24px;
-  }
-
-  .FormularioCotizador-boton {
-    font-size: 1.1rem;
-  }
+.formulario-cotizador-sugerencias li {
+  padding: 10px;
+  cursor: pointer;
 }
 
-@media (min-width: 1024px) {
-  .FormularioCotizador-container {
-    max-width: 450px;
-  }
+.formulario-cotizador-sugerencias li:hover {
+  background-color: #f5f5f5;
+}
+
+/* Eliminar los botones de aumento en campos numéricos */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* WebKit Browsers (Chrome, Safari) */
+input[type="number"] {
+  -webkit-appearance: none;
+  -moz-appearance: textfield; /* Firefox compatibility */
+  appearance: none; /* Standard, non-prefixed property */
+}
+
+/* For Firefox (Gecko) */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none; /* Remove spinner button in WebKit browsers */
+  -moz-appearance: textfield; /* Firefox compatibility */
+  appearance: none; /* Standard, non-prefixed property */
 }
