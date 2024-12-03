@@ -1,0 +1,7 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    font-family: 'Lato','Open Sans','Montserrat','Pacifico','Merriweather',  'sans-serif', 'Playfair Display';
+    /* Elimina el efecto azul de clic en dispositivos móviles para todos los elementos */
+    -webkit-tap-highlight-color: transparent;
+    margin: 0;
+}

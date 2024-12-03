@@ -1,0 +1,56 @@
+/* Estilos generales */
+.Inicio-contenedor {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 16px; /* Agrega un espacio alrededor para dispositivos pequeños */
+    box-sizing: border-box;
+    margin: 0;
+  }
+  .Inicio-contenedor-logos{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    margin: 0;
+    width: 100%;
+    padding: 0;
+  }
+  .Inicio-logo-integra {
+    width: 50px; /* Ajuste para pantallas más pequeñas */
+    max-width: 20%; /* Asegura que no sea más grande que el contenedor */
+    height: auto;
+
+  }
+
+  .Inicio-logo-fmc {
+    width: 150px; /* Ajuste para pantallas más pequeñas */
+    max-width: 20%; /* Asegura que no sea más grande que el contenedor */
+    height: auto;
+    margin-bottom: 20px; /* Espacio entre el logo y el formulario */
+  }
+  
+  /* Ajustes para pantallas medianas (tabletas) */
+  @media (min-width: 600px) {
+    .Inicio-logo-integra {
+      width: 50px;
+      max-width: 15%;
+    }
+  }
+  
+  /* Ajustes para pantallas grandes (desktop) */
+  @media (min-width: 1024px) {
+    .Inicio-logo-integra {
+      width: 50px;
+      max-width: 10%;
+    }
+  
+    .Inicio-contenedor {
+      justify-content: space-around;
+      align-items: center;
+    }
+  }
+  

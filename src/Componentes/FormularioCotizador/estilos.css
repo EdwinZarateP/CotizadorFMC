@@ -1,0 +1,70 @@
+/* Contenedor principal del formulario */
+.FormularioCotizador-container {
+  width: 100%;
+  max-width: 500px; /* Limita el ancho máximo */
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow:  4px 4px 4px 6px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+/* Selectores y inputs */
+.FormularioCotizador-select,
+.FormularioCotizador-inputs {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.FormularioCotizador-select select,
+.FormularioCotizador-inputs input,
+.FormularioCotizador-input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+/* Botón */
+.FormularioCotizador-boton {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.FormularioCotizador-boton:hover {
+  background-color: #0056b3;
+}
+
+/* Texto y mensajes */
+.FormularioCotizador-tarifa,
+.FormularioCotizador-restricciones {
+  text-align: center;
+  margin: 8px 0;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+/* Ajustes responsivos */
+@media (min-width: 600px) {
+  .FormularioCotizador-container {
+    max-width: 400px;
+    padding: 24px;
+  }
+
+  .FormularioCotizador-boton {
+    font-size: 1.1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .FormularioCotizador-container {
+    max-width: 450px;
+  }
+}
