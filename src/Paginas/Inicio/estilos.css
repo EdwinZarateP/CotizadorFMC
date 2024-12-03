@@ -47,7 +47,7 @@
     }
   
     .Inicio-contenedor {
-      justify-content: space-around;
+      justify-content: center;
       align-items: center;
     }
   }
