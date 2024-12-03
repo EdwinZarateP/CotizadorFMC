@@ -8,7 +8,7 @@ const App: React.FC = () => {
     // Encerramos todo en el ProveedorVariables para que puedan acceder a ellas
     <ProveedorVariables 
       hijo={
-    <Router basename="/cotizadorFMC">
+    <Router basename="/CotizadorFMC">
       <Routes>
         <Route path="/" element={<Inicio />} />      
       </Routes>
