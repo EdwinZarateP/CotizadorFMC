@@ -2,7 +2,7 @@
 .Inicio-contenedor {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: top;
     align-items: center;
     min-height: 100vh;
     padding: 16px; /* Agrega un espacio alrededor para dispositivos pequeños */

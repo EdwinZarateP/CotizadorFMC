@@ -17,18 +17,13 @@ const FormularioCotizador: React.FC = () => {
     setCiudadOrigen,
     ciudadDestino,
     setCiudadDestino,
-    alto,
-    setAlto,
-    largo,
-    setLargo,
-    ancho,
-    setAncho,
     valorDeclarado,
     setValorDeclarado,
   } = almacenVariables;
 
   const [cajas, setCajas] = useState<number>(0); 
   const [peso, setPeso] = useState<number>(0); 
+  const [volumen, setVolumen] = useState<number>(0.2); // Nuevo estado para volumen
   const [sugerenciasOrigen, setSugerenciasOrigen] = useState<string[]>([]); 
   const [sugerenciasDestino, setSugerenciasDestino] = useState<string[]>([]); 
 
@@ -45,9 +40,10 @@ const FormularioCotizador: React.FC = () => {
       municipio.CIUDAD_DEPARTAMENTO.toLowerCase().includes(input.toLowerCase())
     );
     
+    // Solo aplicar el filtro de ciudadesPermitidas para el destino
     return listaFiltrada
       .map((municipio) => municipio.CIUDAD_DEPARTAMENTO)
-      .filter((ciudad) => esOrigen ? ciudadesPermitidas.includes(ciudad) : true)
+      .filter((ciudad) => esOrigen ? true : ciudadesPermitidas.includes(ciudad)) // Cambié aquí
       .slice(0, 10); // Limitar a los primeros 10 resultados
   };
 
@@ -62,12 +58,11 @@ const FormularioCotizador: React.FC = () => {
 
   const factorPeso = 400;
 
-  const pesoVolumetrico = (alto && largo && ancho)
-    ? (alto / 100) * (largo / 100) * (ancho / 100) * factorPeso
-    : 0;
+  // Actualización del cálculo de peso volumétrico usando el volumen
+  const pesoVolumetrico = volumen ? volumen * factorPeso : 0;
 
   const porcentajeDeclarado = valorDeclarado
-    ? Math.max(2500, valorDeclarado * 0.005)
+    ? Math.max(2500, valorDeclarado * 0.01)
     : 2500;
 
   const pesoFinal = Math.max(
@@ -84,9 +79,7 @@ const FormularioCotizador: React.FC = () => {
 
     if (!ciudadOrigen) camposVacios.push('Ciudad de origen');
     if (!ciudadDestino) camposVacios.push('Ciudad de destino');
-    if (!alto) camposVacios.push('Alto');
-    if (!largo) camposVacios.push('Largo');
-    if (!ancho) camposVacios.push('Ancho');
+    if (!volumen) camposVacios.push('Volumen'); // Verificar volumen
     if (!peso) camposVacios.push('Peso');
     if (!cajas) camposVacios.push('Cantidad de cajas');
     if (!valorDeclarado) camposVacios.push('Valor declarado');
@@ -117,7 +110,7 @@ const FormularioCotizador: React.FC = () => {
     const origenDestinoConcatenado = `${ciudadOrigen}/${ciudadDestino}`;
     const costoKg = Number(obtenerCostoKg(origenDestinoConcatenado));
     const valorDeclaradoFormateado = formatearMoneda(valorDeclarado);
-    const flete=formatearMoneda(cajas * pesoFinal * costoKg + porcentajeDeclarado);
+    const flete=formatearMoneda(pesoFinal * costoKg + porcentajeDeclarado);
     // Mostrar el resultado de la cotización en una ventana emergente (modal) con el botón de cerrar
     Swal.fire({
         icon: 'success',
@@ -125,7 +118,7 @@ const FormularioCotizador: React.FC = () => {
         html: `
           <strong>Origen/Destino:</strong> ${ciudadOrigen}/${ciudadDestino} <br>
           <strong>Costo por kg:</strong> ${costoKg} <br>
-          <strong>Dimensiones:</strong> ${alto}x${largo}x${ancho} <br>
+          <strong>Volumen:</strong> ${volumen} <br> <!-- Muestra el volumen -->
           <strong>Peso digitado:</strong> ${peso} <br>
           <strong>Volumetrico:</strong> ${pesoVolumetrico} <br>
           <strong>Peso elegido:</strong> ${pesoFinal} <br>
@@ -143,12 +136,10 @@ const FormularioCotizador: React.FC = () => {
   const limpiarFormulario = () => {
     setCiudadOrigen('');
     setCiudadDestino('');
-    setAlto(0);
-    setLargo(0);
-    setAncho(0);
-    setPeso(0);
-    setCajas(0);
-    setValorDeclarado(0);
+    setVolumen(0.2); // Resetear volumen
+    setPeso(1);
+    setCajas(1);
+    setValorDeclarado(500000);
   };
 
   return (
@@ -232,83 +223,72 @@ const FormularioCotizador: React.FC = () => {
           )}
         </div>
 
-        {/* Dimensiones */}
+        {/* Volumen */}
         <div className="formulario-cotizador-entradas-fila">
           <div className="entrada-titulo">
-            <label htmlFor="alto">Alto (cm)</label>
+            <label htmlFor="volumen">Volumen m³ (use separador coma)</label>
             <input
-              id="alto"
+              id="volumen"
               type="number"
-              placeholder="Alto (cm)"
-              value={alto}
-              onChange={(e) => setAlto(validarValor(e.target.value))}
-            />
-          </div>
-          <div className="entrada-titulo">
-            <label htmlFor="largo">Largo (cm)</label>
-            <input
-              id="largo"
-              type="number"
-              placeholder="Largo (cm)"
-              value={largo}
-              onChange={(e) => setLargo(validarValor(e.target.value))}
-            />
-          </div>
-          <div className="entrada-titulo">
-            <label htmlFor="ancho">Ancho (cm)</label>
-            <input
-              id="ancho"
-              type="number"
-              placeholder="Ancho (cm)"
-              value={ancho}
-              onChange={(e) => setAncho(validarValor(e.target.value))}
+              step="any"
+              placeholder="Volumen"
+              value={volumen}
+              onChange={(e) => setVolumen(Number(e.target.value))}
             />
           </div>
         </div>
 
-        {/* Peso, Cajas y Valor declarado */}
+
+        {/* Peso */}
         <div className="formulario-cotizador-entradas-fila">
           <div className="entrada-titulo">
             <label htmlFor="peso">Peso (kg)</label>
             <input
               id="peso"
               type="number"
-              placeholder="Peso (kg)"
+              placeholder="Peso"
               value={peso}
-              onChange={(e) => setPeso(validarValor(e.target.value))}
+              onChange={(e) => setPeso(Number(e.target.value))}
             />
           </div>
+        </div>
+
+        {/* Cajas */}
+        <div className="formulario-cotizador-entradas-fila">
           <div className="entrada-titulo">
-            <label htmlFor="cajas">Cajas</label>
+            <label htmlFor="cajas">Cantidad de cajas</label>
             <input
               id="cajas"
               type="number"
-              placeholder="Cantidad de cajas"
               value={cajas}
-              onChange={(e) => setCajas(validarValor(e.target.value))}
+              onChange={(e) => setCajas(Number(e.target.value))}
             />
           </div>
+        </div>
+
+        {/* Valor Declarado */}
+        <div className="formulario-cotizador-entradas-fila">
           <div className="entrada-titulo">
-            <label htmlFor="valorDeclarado">$ Valor declarado</label>
+            <label htmlFor="valorDeclarado">Valor declarado</label>
             <input
               id="valorDeclarado"
               type="number"
-              placeholder="Valor declarado"
               value={valorDeclarado}
               onChange={(e) => setValorDeclarado(validarValor(e.target.value))}
             />
           </div>
         </div>
-
-        <button type="submit" className="formulario-boton-enviar">
-          Cotizar
-        </button>
-        <button type="button" className="boton-limpiar" onClick={limpiarFormulario}>
-            Limpiar
-        </button>
+        <div className="formulario-cotizador-contenedor-botones">
+          <div className="formulario-cotizador-boton-calculo">
+            <button type="submit">Calcular Flete</button>
+          </div>
+          <div className="formulario-cotizador-boton-limpiar">
+            <button type="button" onClick={limpiarFormulario}>Limpiar formulario</button>
+          </div>
+        </div>
       </form>
     </>
   );
 };
-    
+
 export default FormularioCotizador;
