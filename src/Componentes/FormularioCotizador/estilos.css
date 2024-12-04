@@ -6,13 +6,13 @@
   align-items: center;
   width: 100%;
   max-width: 500px;
-  background-color: white;
+  background-color: #f9f9f9; /* Color de fondo más suave */
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 4px 4px 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Sombra más suave */
   box-sizing: border-box;
   margin: 0 auto;
-  height: 100%;
+  height: auto;
 }
 
 /* Selectores */
@@ -26,17 +26,23 @@
   width: 100%;
   padding: 10px 35px 10px 10px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 6px; /* Bordes más redondeados */
   font-size: 1rem;
+  color: #333; /* Texto oscuro */
+  background-color: #ffffff; /* Fondo blanco */
+  transition: border 0.3s ease; /* Transición suave para bordes */
+}
+
+.formulario-cotizador-select input:focus {
+  border-color: #0056b3; /* Color de borde al hacer foco */
 }
 
 .icono-limpiar {
   position: absolute;
-  top: 50%;
+  top: 45%;
   right: 10px;
-  transform: translateY(-50%);
-  font-size: 1rem;
-  color: #666;
+  font-size: 1.2rem;
+  color: #999; /* Icono de limpieza con color más suave */
   cursor: pointer;
   visibility: hidden;
 }
@@ -54,13 +60,13 @@
 }
 
 .formulario-cotizador-entradas-fila input {
-  display: flex;
+  width: 100%;
   padding: 10px;
-  width: 30%;
   border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 0.8rem;
+  border-radius: 6px; /* Bordes más suaves */
+  font-size: 1rem;
   box-sizing: border-box;
+  background-color: #ffffff; /* Fondo blanco */
 }
 
 /* Campos Peso, Cajas y Valor declarado */
@@ -77,26 +83,42 @@
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 6px;
   font-size: 1rem;
   margin-bottom: 16px;
-  box-sizing: border-box;
+  background-color: #ffffff;
+  transition: border 0.3s ease;
 }
 
-/* Botón */
-.formulario-cotizador-boton {
+.input-peso:focus,
+.input-cajas:focus,
+.input-declarado:focus {
+  border-color: #0056b3; /* Color de borde al hacer foco */
+}
+
+/* Títulos de entrada */
+.entrada-titulo label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600; /* Títulos más prominentes */
+  color: #333; /* Texto en color oscuro */
+  font-size: 12px;
+}
+
+.formulario-boton-enviar {
   width: 100%;
-  padding: 12px;
-  background-color: #95b22c;
-  color: white;
-  border: none;
-  border-radius: 5px;
+  height: 40px;
+  border-radius: 6px;
   font-size: 1rem;
+  color: white;
   cursor: pointer;
+  background-color: #007bff; 
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
 }
 
 .formulario-cotizador-boton:hover {
-  background-color: #aed035;
+  background-color: #0056b3; /* Azul más oscuro en hover */
 }
 
 /* Sugerencias */
@@ -104,24 +126,21 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  background: white;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  background: #ffffff; /* Fondo blanco */
+  border-radius: 6px;
   position: absolute;
   top: 100%;
   width: 100%;
   max-height: 150px;
   overflow-y: auto;
   z-index: 10;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra sutil */
 }
 
 .formulario-cotizador-sugerencias li {
   padding: 10px;
   cursor: pointer;
-}
-
-.formulario-cotizador-sugerencias li:hover {
-  background-color: #f5f5f5;
+  color: #333; /* Color de texto oscuro */
 }
 
 /* Eliminar los botones de aumento en campos numéricos */
@@ -134,14 +153,69 @@ input[type="number"]::-webkit-inner-spin-button {
 /* WebKit Browsers (Chrome, Safari) */
 input[type="number"] {
   -webkit-appearance: none;
-  -moz-appearance: textfield; /* Firefox compatibility */
-  appearance: none; /* Standard, non-prefixed property */
+  -moz-appearance: textfield;
+  appearance: none;
 }
 
 /* For Firefox (Gecko) */
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none; /* Remove spinner button in WebKit browsers */
-  -moz-appearance: textfield; /* Firefox compatibility */
-  appearance: none; /* Standard, non-prefixed property */
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+  appearance: none;
+}
+
+.formulario-cotizador-boton {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.boton-limpiar {
+  background-color: #bdb8b7; /* Rojo */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+  width: 30%;
+}
+
+.boton-limpiar:hover {
+  background-color: #6b6767; /* Rojo oscuro al pasar el cursor */
+}
+
+.boton-limpiar:focus {
+  outline: none;
+}
+
+/* Estilos Responsivos */
+@media (max-width: 768px) {
+  /* Contenedor del formulario */
+  .formulario-cotizador-contenedor {
+    max-width: 100%; /* El contenedor ocupa todo el ancho en móviles */
+    padding: 15px; /* Reducir el padding en móviles */
+  }
+
+  /* Tamaño de fuente */
+  .formulario-cotizador-select input,
+  .formulario-cotizador-entradas-fila input,
+  .input-peso,
+  .input-cajas,
+  .input-declarado {
+    font-size: 0.9rem; /* Reducir el tamaño de la fuente para pantallas pequeñas */
+    padding: 8px; /* Reducir el padding para ajustarse mejor */
+  }
+
+}
+
+@media (max-width: 480px) {
+  /* Ajustar más en pantallas pequeñas */
+
+  .formulario-cotizador-sugerencias {
+    max-height: 120px; /* Reducir la altura máxima de las sugerencias */
+  }
 }

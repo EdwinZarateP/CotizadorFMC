@@ -1,10 +1,10 @@
 import { createContext, useState, ReactNode, Dispatch, SetStateAction } from 'react';
 
 // Si quiere usar una variable de aquí en alguna parte de la App, siga estos pasos:
-// 1. En el componente elegido, import { useContext } from 'react';
-// 2. En el componente elegido, traiga el proveedor así: import { ContextoApp } from '../../Contexto/index'
-// 3. Antes del return del componente, cree lo siguiente: const almacenVariables = useContext(ContextoApp)
-// 4. Use la variable que desee del ProveedorVariables, por ejemplo: almacenVariables.esFavorito
+// 1. En el componente elegido, importa { useContext } desde 'react';
+// 2. En el componente elegido, trae el proveedor así: import { ContextoApp } from '../../Contexto/index'
+// 3. Antes del return del componente, crea lo siguiente: const almacenVariables = useContext(ContextoApp)
+// 4. Usa la variable que desees del ProveedorVariables, por ejemplo: almacenVariables.esFavorito
 
 //-------------------------------------------------------------------------------------
 // 1. Define la interfaz para el contexto
@@ -22,14 +22,14 @@ interface ContextProps {
   setCiudadOrigen: Dispatch<SetStateAction<string>>;
   ciudadDestino: string;
   setCiudadDestino: Dispatch<SetStateAction<string>>;
-  alto: string;
-  setAlto: Dispatch<SetStateAction<string>>;
-  largo: string;
-  setLargo: Dispatch<SetStateAction<string>>;
-  ancho: string;
-  setAncho: Dispatch<SetStateAction<string>>;
-  valorDeclarado: string;
-  setValorDeclarado: Dispatch<SetStateAction<string>>;
+  alto: number; // Definido como number para tratarlo como número
+  setAlto: Dispatch<SetStateAction<number>>; // Aseguramos que 'setAlto' maneje números
+  largo: number; // Definido como number
+  setLargo: Dispatch<SetStateAction<number>>; // 'setLargo' también maneja números
+  ancho: number; // Definido como number
+  setAncho: Dispatch<SetStateAction<number>>; // 'setAncho' maneja números
+  valorDeclarado: number; // Definido como number para manejar el valor declarado como número
+  setValorDeclarado: Dispatch<SetStateAction<number>>; // 'setValorDeclarado' también es para números
 }
 
 // Crea el contexto con un valor inicial undefined
@@ -52,12 +52,12 @@ export const ProveedorVariables: React.FC<ProveedorVariablesProps> = ({ hijo }) 
   const cerrarAlgo = () => setEstaAbiertoAlgo(false);
 
   // Estados para el formulario cotizador
-  const [ciudadOrigen, setCiudadOrigen] = useState('');
-  const [ciudadDestino, setCiudadDestino] = useState('');
-  const [alto, setAlto] = useState('');
-  const [largo, setLargo] = useState('');
-  const [ancho, setAncho] = useState('');
-  const [valorDeclarado, setValorDeclarado] = useState('');
+  const [ciudadOrigen, setCiudadOrigen] = useState<string>(''); // Ciudad de origen como string
+  const [ciudadDestino, setCiudadDestino] = useState<string>(''); // Ciudad de destino como string
+  const [alto, setAlto] = useState<number>(0); // Alto como number
+  const [largo, setLargo] = useState<number>(0); // Largo como number
+  const [ancho, setAncho] = useState<number>(0); // Ancho como number
+  const [valorDeclarado, setValorDeclarado] = useState<number>(0); // Valor declarado como number
 
   //-------------------------------------------------------------------------------------
   // 3. Crea el objeto de contexto con los valores y funciones necesarios que quieres proveer
@@ -89,4 +89,4 @@ export const ProveedorVariables: React.FC<ProveedorVariablesProps> = ({ hijo }) 
       {hijo}
     </ContextoApp.Provider>
   );
-};
+};  
