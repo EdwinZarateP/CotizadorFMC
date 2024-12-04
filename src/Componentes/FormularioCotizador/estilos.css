@@ -1,170 +1,94 @@
-/* Contenedor principal */
 .formulario-cotizador-contenedor {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  width: 100%;
-  max-width: 500px;
-  background-color: #f9f9f9; /* Color de fondo más suave */
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Sombra más suave */
-  box-sizing: border-box;
+  max-width: 600px;
   margin: 0 auto;
-  height: auto;
-
+  padding: 20px;
+  background-color: #f7f7f7;
+  border-radius: 10px;
 }
 
-/* Estilos de entradas y selects */
-.formulario-cotizador-select,
-.formulario-cotizador-entradas-fila {
-  width: 100%;
-  margin-bottom: 16px;
+.formulario-cotizador-select {
+  position: relative;
+  margin-bottom: 15px;
 }
 
-.formulario-cotizador-select input,
-.formulario-cotizador-entradas-fila input {
+.formulario-cotizador-select input {
   width: 100%;
-  padding: 12px;
+  padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 1rem;
-  color: #333; /* Texto oscuro */
-  background-color: #fff;
-  transition: border 0.3s ease; /* Transición suave para bordes */
+  border-radius: 5px;
 }
 
-.formulario-cotizador-select input:focus,
-.formulario-cotizador-entradas-fila input:focus {
-  border-color: #0056b3; /* Color de borde al hacer foco */
-}
-
-/* Icono de limpiar */
 .icono-limpiar {
   position: absolute;
-  top: 45%;
   right: 10px;
-  font-size: 1.2rem;
-  color: #999; /* Icono de limpieza con color más suave */
+  top: 65%;
+  transform: translateY(-50%);
   cursor: pointer;
-  visibility: hidden;
+  font-size: 20px;
+  color: #888;
 }
 
-.formulario-cotizador-select input:not(:placeholder-shown) ~ .icono-limpiar {
-  visibility: visible;
+.icono-limpiar:hover {
+  color: #f00;
 }
 
-/* Botones */
-.formulario-cotizador-contenedor-botones{
-  width: 100%;
-}
-.formulario-cotizador-boton-calculo button,
-.boton-limpiar {
-  width: 100%; 
-  padding: 12px;
-  font-size: 1.1rem;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-bottom: 10px;
-}
-
-.formulario-cotizador-boton-calculo button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-}
-
-.formulario-cotizador-boton-limpiar button {
-  background-color: #606468;
-  color: white;
-  border: none;
-}
-
-.formulario-cotizador-boton-calculo button:hover {
-  background-color: #0056b3; /* Azul más oscuro en hover */
-}
-
-.boton-limpiar {
-  background-color: #bdb8b7;
-  color: white;
-  border: none;
-}
-
-.boton-limpiar:hover {
-  background-color: #6b6767; /* Rojo oscuro al pasar el cursor */
-}
-
-.boton-limpiar:focus {
-  outline: none;
-}
-
-/* Sugerencias */
 .formulario-cotizador-sugerencias {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  background: #fff;
-  border-radius: 6px;
   position: absolute;
-  width: 30%;
-  max-height: 150px;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-height: 200px;
   overflow-y: auto;
   z-index: 10;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+  padding-left: 0; /* Eliminar viñetas */
 }
 
 .formulario-cotizador-sugerencias li {
-  padding: 12px;
+  padding: 10px;
   cursor: pointer;
-  color: #333; /* Color de texto oscuro */
 }
 
-/* Eliminar los botones de aumento en campos numéricos */
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+.formulario-cotizador-sugerencias li:hover {
+  background-color: #f1f1f1;
 }
 
-/* WebKit Browsers (Chrome, Safari) */
-input[type="number"] {
-  -webkit-appearance: none;
-  -moz-appearance: textfield;
-  appearance: none;
+.formulario-cotizador-entradas-fila {
+  margin-bottom: 15px;
 }
 
-/* Para Firefox (Gecko) */
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  -moz-appearance: textfield;
-  appearance: none;
+.formulario-cotizador-entradas-fila input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
-/* Estilos Responsivos */
-@media (max-width: 768px) {
-  /* Contenedor del formulario */
-  .formulario-cotizador-contenedor {
-    max-width: 100%; /* El contenedor ocupa todo el ancho en móviles */
-    padding: 15px; /* Reducir el padding en móviles */
-  }
+.formulario-cotizador-botones {
+  display: flex;
+  justify-content: space-between;
+}
 
-  /* Tamaño de fuente */
-  .formulario-cotizador-select input,
-  .formulario-cotizador-entradas-fila input,
-  .input-peso,
-  .input-cajas,
-  .input-declarado {
-    font-size: 0.9rem; /* Reducir el tamaño de la fuente para pantallas pequeñas */
-    padding: 10px; /* Reducir el padding para ajustarse mejor */
-  }
+.formulario-cotizador-boton {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
-  /* Botones en móvil */
-  .formulario-cotizador-boton button,
-  .boton-limpiar {
-    padding: 15px; /* Aumentar padding para un diseño más cómodo */
-    font-size: 1rem; /* Ajustar tamaño de fuente */
-  }
+.formulario-cotizador-boton:hover {
+  background-color: #218838;
+}
+
+.formulario-cotizador-boton.limpiar {
+  background-color: #75736f;
+}
+
+.formulario-cotizador-boton.limpiar:hover {
+  background-color: #42403b;
 }
